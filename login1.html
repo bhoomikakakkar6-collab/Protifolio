@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ek Noor Neki Da Hospital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      background: #eff6ff;
+    }
+
+    /* Left Panel */
+    .left {
+      width: 42%;
+      background: #0a2463;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .left::before {
+      content: '';
+      position: absolute;
+      width: 350px; height: 350px;
+      border-radius: 50%;
+      border: 55px solid rgba(59,130,246,0.12);
+      top: -80px; right: -80px;
+    }
+
+    .left::after {
+      content: '';
+      position: absolute;
+      width: 250px; height: 250px;
+      border-radius: 50%;
+      border: 45px solid rgba(59,130,246,0.08);
+      bottom: -60px; left: -60px;
+    }
+
+    .left img {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255,255,255,0.2);
+      margin-bottom: 1.5rem;
+      position: relative; z-index: 1;
+    }
+
+    .left h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: white;
+      text-align: center;
+      line-height: 1.3;
+      position: relative; z-index: 1;
+      margin-bottom: 0.8rem;
+    }
+
+    .left h1 span { color: #60a5fa; }
+
+    .left p {
+      font-size: 0.88rem;
+      color: #bfdbfe;
+      text-align: center;
+      line-height: 1.7;
+      max-width: 260px;
+      position: relative; z-index: 1;
+    }
+
+    .dot-badge {
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50px;
+      padding: 0.45rem 1rem;
+      font-size: 0.8rem;
+      color: #bfdbfe;
+      position: relative; z-index: 1;
+    }
+
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    /* Right Panel */
+    .right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .box {
+      background: white;
+      border-radius: 14px;
+      padding: 2.2rem 1.8rem;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 4px 20px rgba(30,95,212,0.08);
+    }
+
+    .box h2 { font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem; }
+    .box p  { font-size: 0.84rem; color: #94a3b8; margin-bottom: 1.6rem; }
+
+    .field { margin-bottom: 1rem; }
+
+    label { display: block; font-size: 0.81rem; font-weight: 600; color: #475569; margin-bottom: 0.35rem; }
+
+    .input-wrap { position: relative; display: flex; align-items: center; }
+
+    .icon {
+      position: absolute; left: 10px;
+      width: 15px; height: 15px;
+      color: #3b82f6; pointer-events: none;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.68rem 0.9rem 0.68rem 2.2rem;
+      border: 1.5px solid #dbeafe;
+      border-radius: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.91rem;
+      color: #0f172a;
+      background: #eff6ff;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus {
+      border-color: #3b82f6;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+
+    input::placeholder { color: #cbd5e1; }
+
+    .eye {
+      position: absolute; right: 10px;
+      background: none; border: none;
+      cursor: pointer; color: #94a3b8;
+      padding: 0; display: flex; align-items: center;
+    }
+    .eye:hover { color: #3b82f6; }
+    .eye svg { width: 15px; height: 15px; }
+
+    .btn {
+      width: 100%;
+      padding: 0.78rem;
+      background: #1e5fd4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.94rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.6rem;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 4px 12px rgba(30,95,212,0.2);
+    }
+    .btn:hover   { background: #0a2463; }
+    .btn:active  { transform: scale(0.98); }
+    .btn:disabled { background: #bfdbfe; cursor: not-allowed; box-shadow: none; }
+
+    .msg {
+      margin-top: 0.8rem;
+      padding: 0.65rem 0.9rem;
+      border-radius: 7px;
+      font-size: 0.83rem;
+      text-align: center;
+      font-weight: 500;
+      display: none;
+    }
+    .msg.success { background: #eff6ff; color: #1e5fd4; border: 1px solid #bfdbfe; display: block; }
+    .msg.error   { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; display: block; }
+
+    .link-row {
+      text-align: center;
+      font-size: 0.83rem;
+      color: #94a3b8;
+      margin-top: 1.1rem;
+    }
+    .link-row a { color: #1e5fd4; font-weight: 600; cursor: pointer; text-decoration: none; }
+    .link-row a:hover { text-decoration: underline; }
+
+    @media (max-width: 650px) {
+      body { flex-direction: column; }
+      .left { width: 100%; padding: 2rem; }
+      .left::before, .left::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Panel -->
+  <div class="left">
+    <img src="logo.jpg" alt="Logo"/>
+    <h1>Ek Noor<br/><span>Neki Da Hospital</span></h1>
+    <p>Providing compassionate healthcare with dedication and trust.</p>
+    <div class="dot-badge"><div class="dot"></div> Portal is live</div>
+  </div>
+
+  <!-- Right Panel -->
+  <div class="right">
+    <div class="box">
+
+      <!-- REGISTER FORM -->
+      <div id="register-form">
+        <h2>Create account</h2>
+        <p>Register to access the hospital portal</p>
+
+        <div class="field">
+          <label>Gmail Address</label>
+          <div class="input-wrap">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/>
+            </svg>
+            <input type="email" id="r-email" placeholder="Enter your email..."/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+          <div class="input-wrap">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <input type="password" id="r-pass" placeholder="Min 6 characters"/>
+            <button class="eye" onclick="togglePw('r-pass', this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Confirm Password</label>
+          <div class="input-wrap">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <input type="password" id="r-conf" placeholder="Re-enter password"/>
+          </div>
+        </div>
+
+        <button class="btn" id="r-btn" onclick="doRegister()">Register</button>
+        <div class="msg" id="r-msg"></div>
+        <div class="link-row">Already have an account? <a onclick="show('login-form')">Sign in here</a></div>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div id="login-form" style="display:none">
+        <h2>Welcome back</h2>
+        <p>Sign in to your hospital account</p>
+
+        <div class="field">
+          <label>Gmail Address</label>
+          <div class="input-wrap">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/>
+            </svg>
+            <input type="email" id="l-email" placeholder="you@gmail.com"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+          <div class="input-wrap">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <input type="password" id="l-pass" placeholder="••••••••"/>
+            <button class="eye" onclick="togglePw('l-pass', this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button class="btn" id="l-btn" onclick="doLogin()">Sign In</button>
+        <div class="msg" id="l-msg"></div>
+        <div class="link-row">Don't have an account? <a onclick="show('register-form')">Register here</a></div>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+  function show(id) {
+    document.getElementById('register-form').style.display = id === 'register-form' ? 'block' : 'none';
+    document.getElementById('login-form').style.display    = id === 'login-form'    ? 'block' : 'none';
+  }
+
+  const eyeOpen   = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
+  const eyeClosed = `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M1 1l22 22"/>`;
+
+  function togglePw(id, btn) {
+    const inp  = document.getElementById(id);
+    const show = inp.type === 'password';
+    inp.type   = show ? 'text' : 'password';
+    btn.querySelector('svg').innerHTML = show ? eyeClosed : eyeOpen;
+  }
+
+  function showMsg(id, type, text) {
+    const el = document.getElementById(id);
+    el.className  = 'msg ' + type;
+    el.textContent = text;
+  }
+
+  async function doRegister() {
+    const email    = document.getElementById('r-email').value.trim();
+    const password = document.getElementById('r-pass').value;
+    const confirm  = document.getElementById('r-conf').value;
+    const btn      = document.getElementById('r-btn');
+
+    if (!email || !password)                         { showMsg('r-msg','error','Email and password are required.'); return; }
+    if (!email.toLowerCase().endsWith('@gmail.com')) { showMsg('r-msg','error','Please enter a valid Gmail address.'); return; }
+    if (password.length < 6)                         { showMsg('r-msg','error','Password must be at least 6 characters.'); return; }
+    if (password !== confirm)                        { showMsg('r-msg','error','Passwords do not match.'); return; }
+
+    btn.disabled = true; btn.textContent = 'Registering...';
+    try {
+      const res  = await fetch('http://localhost:5000/register', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        showMsg('r-msg','success','Account created! You can now sign in.');
+        setTimeout(() => show('login-form'), 1500);
+      } else {
+        showMsg('r-msg','error', data.error || 'Registration failed.');
+      }
+    } catch {
+      showMsg('r-msg','error','Cannot connect to server. Run: python server.py');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Register';
+    }
+  }
+
+  async function doLogin() {
+    const email    = document.getElementById('l-email').value.trim();
+    const password = document.getElementById('l-pass').value;
+    const btn      = document.getElementById('l-btn');
+
+    if (!email || !password)                         { showMsg('l-msg','error','Please enter Gmail and password.'); return; }
+    if (!email.toLowerCase().endsWith('@gmail.com')) { showMsg('l-msg','error','Please enter a valid Gmail address.'); return; }
+
+    btn.disabled = true; btn.textContent = 'Signing in...';
+    try {
+      const res  = await fetch('http://localhost:5000/login', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        showMsg('l-msg','success','Login successful! Redirecting...');
+        setTimeout(() => { window.location.href = 'home (1).html'; }, 1000);
+      } else {
+        showMsg('l-msg','error', data.error || 'Login failed.');
+      }
+    } catch {
+      showMsg('l-msg','error','Cannot connect to server. Run: python server.py');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Sign In';
+    }
+  }
+</script>
+</body>
+</html>
